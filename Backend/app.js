@@ -16,7 +16,7 @@ app.use("/api/task", taskRoutes);
 app.get("/test", (req, res) => {
   return res.status(200).json({
     success: true,
-    message: "Yo Bro You Connected Well",
+    message: "Kid You are doing Good",
   });
 });
 app.get("/api/sql", async (req, res) => {

@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: ./Backend
+    ports:
+      - "4001:4000"
+    environment:
+      PORT: 4000
+      MONGO_URI: mongodb://mongodb:27017/taskmanager
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  mongodb:
+    image: mongo:8
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongo-data:
